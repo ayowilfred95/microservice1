@@ -31,31 +31,7 @@ jobs:
         file: ./Dockerfile.backend
         push: true
         tags: ${{ secrets.ACR_NAME }}.azurecr.io/yourbackendapp:latest
-
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup Azure CLI
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-
-    - name: Install kubectl
-      run: sudo az aks install-cli
-
     - name: Deploy to AKS
       run: |
-        az aks get-credentials --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER }}
+        az aks get-credentials --resource-group <RESOURCE_GROUP> --name <CLUSTER_NAME>
         kubectl apply -f k8s/

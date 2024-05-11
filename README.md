@@ -16,7 +16,7 @@ The Terraform scripts included in this repository are responsible for setting up
 
 ### Deployment YAMLs
 
-The deployment YAML files define the deployment settings for Microservice1's backend and frontend applications. These files specify the number of replicas, container specifications, and resource limits. The backend typically listens on port 80, while the frontend listens on port 5000.
+The deployment YAML files define the deployment settings for Microservice1's backend applications. These files specify the number of replicas, container specifications, and resource limits. The backend typically listens on port 80.
 
 ### Service YAMLs
 

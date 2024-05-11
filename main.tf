@@ -16,8 +16,8 @@ provider "azurerm" {
 
 # Resource Group
 resource "azurerm_resource_group" "aks_rg" {
-  name     = "aksResourceGroup"
-  location = "East US"
+  name     = var.rgname
+  location = var.location 
 }
 
 # Virtual Network and Subnet
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "aks_subnet" {
 # AKS Cluster
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
-  name                = "myAKSCluster"
+  name                = var.aks-cluster
   location            = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
   dns_prefix          = "myaksdns"
@@ -64,7 +64,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 # Azure Container Registry
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "myACR"
+  name                     = var.acr
   resource_group_name      = azurerm_resource_group.aks_rg.name
   location                 = azurerm_resource_group.aks_rg.location
   sku                      = "Basic"
